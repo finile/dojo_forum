@@ -4,7 +4,6 @@
 
 
 <% @article.each do |article|%>
-  <% unless article.published? %>
     <%= article.title %> <br>
     <%= article.content %> <br>
     <% if article.published? %>
@@ -16,6 +15,5 @@
     <%= link_to 'Show', article_path(article) %>
     <%= link_to 'Edit', edit_article_path(article) %>
     <%= link_to 'Delete', article_path(article), method: :delete, data: {confirm:"Are you sure?"} %> <br>
-  <% end %>
 <% end %>
 

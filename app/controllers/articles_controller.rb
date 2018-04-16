@@ -1,27 +1,34 @@
 class ArticlesController < ApplicationController
-
   def index
     @article = Article.all
   end
 
   def new
-    @article = Article.new
-  end
-
-  def create
-    @article = Article.new(article_params)
-    @article.published_at = Time.zone.now if published?
-  
-    if @article.save
-      redirect_to articles_path, notice: "new article created"
-    else
-      redirect_to root_path
-      flash[:notice] = "draft was failed to created"
+    if current_user.nil?
+      redirect_to new_user_session_path
+    else    
+      @article = Article.new
     end
   end
 
+  def create  
+      @article = current_user.articles.new(article_params)
+      @article.published_at = Time.zone.now if published?
+    
+      if @article.save
+        redirect_to articles_path, notice: "new article created"
+      else
+        redirect_to root_path
+        flash[:notice] = "draft was failed to created"
+      end
+  end
+
   def show
-    @article = Article.find(params[:id])
+    if current_user.nil?
+      redirect_to new_user_session_path
+    else
+      @article = Article.find(params[:id])
+    end
   end
 
   def edit

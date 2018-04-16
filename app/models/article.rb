@@ -7,6 +7,8 @@ class Article < ApplicationRecord
   #   @article.imag = current_draft.image
   # end
 
+  belongs_to :user
+
   def published?
     published_at?
   end
