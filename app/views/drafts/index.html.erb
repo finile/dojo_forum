@@ -1,0 +1,12 @@
+<h1>Drafts</h1>
+
+<%= link_to 'New Draft', new_draft_path %> <br>
+
+<% @draft.each do |draft|%>
+  <%= draft.title %> <br>
+  <%= draft.content %> <br>
+  <%= link_to 'Show', draft_path(draft) %>
+  <%= link_to 'Edit', edit_draft_path(draft) %>
+  <%= link_to 'Delete', draft_path(draft), method: :delete, data: {confirm:"Are you sure?"} %> <br>
+<% end %>
+

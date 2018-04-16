@@ -1,0 +1,12 @@
+
+<%= @article.title %>
+<%= @article.content %><br>
+<p>
+  <% if @article.published? %>
+    <span>Article</span>
+  <% else %>
+    <span >Draft</span>
+  <% end %>
+</p>
+
+<%= link_to 'Back to Index', articles_path %>
