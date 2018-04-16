@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
 
   def create  
-      @article = current_user.articles.new(article_params)
+      @article = current_user.articles.build(article_params)
       @article.published_at = Time.zone.now if published?
     
       if @article.save
@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :content, :image)    
+    params.require(:article).permit(:title, :content, :image, :published_at)    
   end
 
   def set_article
@@ -65,11 +65,11 @@ class ArticlesController < ApplicationController
   end
 
   def published?
-    params[:commit] == "submit"
+    params[:commit] == "Submit"
   end
 
   def save_as_draft?
-    params[:commit] == "save"
+    params[:commit] == "Save Draft"
   end
 
 end
