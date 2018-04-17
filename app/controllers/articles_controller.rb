@@ -15,8 +15,10 @@ class ArticlesController < ApplicationController
       @article = current_user.articles.build(article_params)
       @article.published_at = Time.zone.now if published?
     
-      if @article.save
-        redirect_to articles_path, notice: "new article created"
+      if @article.save && published?
+        redirect_to article_path(@article), notice: "new article created"
+      elsif @article.save != published?
+        redirect_to user_path(current_user), notice: "new draft created"
       else
         redirect_to root_path
         flash[:notice] = "draft was failed to created"

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="page-header">
+        <div class="col-md-3 col-sm-4">
+          <div class="text-center">
+            <img src="http://via.placeholder.com/350x350" class="img-responsive img-rounded">
+          </div>
+           <div class="pull-left">
+          <h2><%= @user.name %></h2>
+        </div>
+        </div>
+        <div class="col-md-9 col-sm-8">
+          <div><%= simple_format @user.intro %></div>
+          <div class="pull-right">
+            <% if @user.email == current_user.email %>
+              <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-md btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <br>
+      <div class="col-md-10">
+      <ul class="nav nav-tabs">
+        <li><a href="#">My Post</a></li>
+        <li><a href="#">My Comment</a></li>
+        <li><a href="#">My Collect</a></li>
+        <li class="active"><a href="">My Draft</a></li>
+        <li><a href="#">My Friend</a></li>
+      </ul>
+      <br>
+      <table class="table table-striped">
+        <tbody>
+          <% @posted_articles.each do |article|%>
+          <% unless article.published? %>
+            <tr>
+              <td><%= article.title %> <br></td>
+              <td>
+                <% if article.published? %>
+                  <span>Article</span>
+                <% else %>
+                  <span >Draft</span>
+                <% end %>
+              </td>
+              <td><%= article.updated_at %></td>
+              <td>
+                <% if current_user == article.user %>
+                  <%= link_to 'Edit', edit_article_path(article) %> | <%= link_to 'Delete', article_path(article), method: :delete, data: {confirm:"Are you sure?"} %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'New Post', new_article_path, class: "btn btn-md btn-primary" %>
+      </div>
+  </div>
+</div>
+

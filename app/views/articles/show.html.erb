@@ -1,6 +1,27 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>
+      <%= @article.title %>
+      <button class="btn btn-md btn-primary pull-right">Collect</button>      
+      <button class="btn btn-md btn-primary pull-right">Comment</button>
+    </h1>
+  </div>
+  <div class="col-md-2">
+    <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+    <%= @article.user.name %>
+  </div> 
+  <div class="col-md-10">
+    <div class="tweets col-xs-12">
+      <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
+      <%= @article.content %>
+    </div>
+    <% if current_user == @article.user %>
+      <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %>
+      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-md btn-primary pull-right " %> 
+    <% end %>
+  </div>
+</div>
 
-<%= @article.title %>
-<%= @article.content %><br>
 <p>
   <% if @article.published? %>
     <span>Article</span>

@@ -30,6 +30,7 @@
             <% if current_user %>
               <!-- 使用者能創建帳號、登入、登出 -->
               <li><p class="navbar-text">Hi, <%= current_user.email %></p></li>
+              <li><%= link_to 'Profile', user_path(current_user) %></li>
               <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
             <% else %>
               <li><%= link_to('註冊', new_user_registration_path) %></li>

@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :articles
   resources :drafts
 
+  resources :users, only: [:show, :edit, :update]
+
 end
