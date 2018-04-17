@@ -31,6 +31,7 @@ class ArticlesController < ApplicationController
     else
       @article = Article.find(params[:id])
     end
+    @comment = Comment.new
   end
 
   def edit
