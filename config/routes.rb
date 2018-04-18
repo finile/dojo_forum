@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   
   resources :drafts
-
+  resources :categories
   resources :users, only: [:show, :edit, :update]
 
 end

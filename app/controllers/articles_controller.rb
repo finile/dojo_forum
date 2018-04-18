@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     @article = Article.all
+    @categories = Category.all
   end
 
   def new
@@ -14,7 +15,8 @@ class ArticlesController < ApplicationController
   def create  
       @article = current_user.articles.build(article_params)
       @article.published_at = Time.zone.now if published?
-    
+      
+      
       if @article.save && published?
         redirect_to article_path(@article), notice: "new article created"
       elsif @article.save != published?
@@ -23,6 +25,7 @@ class ArticlesController < ApplicationController
         redirect_to root_path
         flash[:notice] = "draft was failed to created"
       end
+
   end
 
   def show
@@ -60,7 +63,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :content, :image, :published_at)    
+    params.require(:article).permit(:title, :content, :image, :published_at, category_ids:[])    
   end
 
   def set_article

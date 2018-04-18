@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to article_path(@article)
+    render :json => { :id => @comment.id }
   end
 
   private 

@@ -5,36 +5,44 @@
       <button class="btn btn-md btn-primary pull-right">Collect</button>      
       <button class="btn btn-md btn-primary pull-right">Comment</button>
     </h1>
-  </div>
-  <div class="col-md-2">
-    <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-    <%= @article.user.name %>
-  </div> 
-  <div class="col-md-10">
-    <div class="tweets col-xs-12">
-      <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
-      <%= @article.content %>
+    <div class="col-md-2">
+      <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+      <%= @article.user.name %>
+    </div> 
+    <div class="col-md-10">
+      <div class="tweets col-xs-12">
+        <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
+        <%= @article.content %>
+        <%= @article.categories.map(&:name).sort.join(", ") %>
+
+      </div>
+      <% if current_user == @article.user %>
+        <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %>
+        <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-md btn-primary pull-right " %>
+      <% end %>
     </div>
-    <% if current_user == @article.user %>
-      <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %>
-      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-md btn-primary pull-right " %>
-    <% end %>
   </div>
   
-  <% @article.comments.each do |comment| %>
-  <div class="col-md-2">
-    <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-    <%= comment.user.name %>
-  </div> 
-  <div class="col-md-10">
-    <div class="tweets col-xs-12">
-      <%= comment.content %>
+  <div id="comment">
+    <% @article.comments.each do |comment| %>
+    <div class="col-md-12" id="<%= comment.id %>">
+      <div class="col-md-2">
+        <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+        <%= comment.user.name %>
+      </div> 
+      <div class="col-md-10">
+        <div class="tweets col-xs-12">
+          <%= comment.content %>
+        </div>
+        <% if current_user == @article.user %>
+     <!--  <!--     <%= link_to 'Delete', article_comment_path(@article,comment), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %> --> -->
+  <!--          <span class="delete btn btn-md btn-primary pull-right">Delete</span>
+          <%= link_to 'Edit', edit_article_comment_path(@article), class: "btn btn-md btn-primary pull-right " %> -->
+        <% end %>
+      </div>
     </div>
-    <% if current_user == @article.user %>
-      <%= link_to 'Delete', article_comment_path(@article,comment), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %>
     <% end %>
   </div>
-  <% end %>
 
 
 
@@ -64,3 +72,18 @@
 </p>
 
 <%= link_to 'Back to Index', articles_path %>
+
+<!-- <script>
+$("#comment").on("click", ".delete", function(event) {
+  var id = event.target.parentNode.parentNode.id;
+  console.log(id);
+  $.ajax({
+    url: "comments/" + id,
+    method: "DELETE",
+    dataType: "json",
+    success: function(data) {
+      $("#" + data["id"]).remove();
+    }
+  });
+});
+</script> -->
