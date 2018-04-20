@@ -15,12 +15,9 @@ h4 {
   font-size: 20px;
 }
 
-
 a:hover {
   text-decoration: none;
 }
-
-
 
 nav.navbar {
   background-color: #88c4ce;
@@ -34,17 +31,23 @@ nav.navbar {
 .navbar-nav {
   li {
     a.nav-avatar {
-      padding: 10px;
+      padding: 5px;
     }
     a {
-      padding: 30px 10px;
+      padding: 25px 5px;
       font-size: 20px;
     }
   }
 }
 
+.navbar-nav .active {
+  border-bottom : 1px solid black;
+
+} 
+
+
 .navbar-text {
-    margin-top: 25px;
+    margin-top: 20px;
     margin-bottom: 15px;
     font-size: 20px;
 }
@@ -161,4 +164,9 @@ textarea.text-area {
   font-size: 20px;
   border-radius: 8px;
   border-color: #b6d6e4;
+}
+
+i {
+  font-size: 18px;
+  padding:5px;
 }

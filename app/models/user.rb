@@ -11,4 +11,10 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
+  ROLE_STATUS = [
+    ["Admin", :admin],
+    ["Normal", :normal]
+  ]
+
+
 end

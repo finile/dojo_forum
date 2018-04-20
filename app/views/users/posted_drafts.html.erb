@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render partial: "shared/user_nav" %>
+
+      <table class="table table-striped">
+        <tbody>
+          <% @posted_articles.each do |article|%>
+            <% if article.published? %>
+            <tr>
+              <td><%= article.title %> <br></td>
+              <td>
+                <% unless article.published? %>
+                  <span>Article</span>
+                <% else %>
+                  <span >Draft</span>
+                <% end %>
+              </td>
+              <td><%= article.updated_at %></td>
+              <td>
+                <% if current_user == article.user %>
+                  <i>
+                    <%= link_to '', edit_article_path(article), class: "fas fa-pen-square" %></i>
+                  <i> 
+                    <%= link_to '', article_path(article), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt" %>
+                  </i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

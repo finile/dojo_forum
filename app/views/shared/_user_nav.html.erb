@@ -1,0 +1,29 @@
+<div class="page-header">
+  <div class="col-md-3 col-sm-4">
+    <div class="text-center">
+      <img src="http://via.placeholder.com/350x350" class="img-responsive img-rounded">
+      </div>
+      <div class="pull-left">
+      <h2><%= @user.name %></h2>
+    </div>
+  </div>
+  <div class="col-md-9 col-sm-8">
+    <div><%= simple_format @user.intro %></div>
+    <div class="pull-right">
+      <% if @user.email == current_user.email %>
+      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-md btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<br>
+<div class="col-md-10">
+  <ul class="nav nav-tabs">
+    <li class="<%= active_class(posted_articles_user_path) %>"><%= link_to 'My Post', posted_articles_user_path(@user), method: :get %> </li>
+    <li class="<%= active_class(posted_comments_user_path) %>"><%= link_to 'My Comment', posted_comments_user_path(@user), method: :get %></li>
+    <li><a href="#">My Collect</a></li>
+    <li class="<%= active_class(posted_drafts_user_path) %>"><%= link_to 'My Draft', posted_drafts_user_path(@user), method: :get %></li>
+    <li><a href="#">My Friend</a></li>
+  </ul>
+</div>

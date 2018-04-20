@@ -13,19 +13,17 @@ class ArticlesController < ApplicationController
   end
 
   def create  
-      @article = current_user.articles.build(article_params)
-      @article.published_at = Time.zone.now if published?
-      
-      
-      if @article.save && published?
-        redirect_to article_path(@article), notice: "new article created"
-      elsif @article.save != published?
-        redirect_to user_path(current_user), notice: "new draft created"
-      else
-        redirect_to root_path
-        flash[:notice] = "draft was failed to created"
-      end
-
+    @article = current_user.articles.build(article_params)
+    @article.published_at = Time.zone.now if published?
+        
+    if @article.save && published?
+      redirect_to article_path(@article), notice: "new article created"
+    elsif @article.save != published?
+      redirect_to posted_drafts_user_path(current_user), notice: "new draft created"
+    else
+      redirect_to root_path
+      flash[:notice] = "draft was failed to created"
+    end
   end
 
   def show
@@ -77,5 +75,4 @@ class ArticlesController < ApplicationController
   def save_as_draft?
     params[:commit] == "Save Draft"
   end
-
 end

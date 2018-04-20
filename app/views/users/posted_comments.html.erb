@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render partial: "shared/user_nav" %>
+      <div id="comment">
+        <% @posted_comments.each do |comment| %>
+        <div class="col-md-12" id="<%= comment.id %>">
+          <div class="col-md-12">
+            <%= comment.article.title %>
+          </div> 
+          <div class="col-md-10">
+            <div class="tweets">
+              <%= comment.content %>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="tweets">
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>  
+    </div>
+  </div>
+</div>

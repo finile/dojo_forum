@@ -37,7 +37,7 @@
           <% end %>
       </td>
       <td><%= article.categories.map(&:name).sort.join(", ") %></td>
-      <td>xxxx</td>
+      <td><%= link_to 'Show', article_path(article)%></td>
       
     </tr>
     <% end %>

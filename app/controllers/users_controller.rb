@@ -19,6 +19,21 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def posted_articles
+    @user = User.find(params[:id])
+    @posted_articles = @user.articles
+  end
+
+  def posted_drafts
+    @user = User.find(params[:id])
+    @posted_articles = @user.articles
+  end
+
+  def posted_comments
+    @user = User.find(params[:id])
+    @posted_comments = @user.comments
+  end
+
   private
 
   def set_user
