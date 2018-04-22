@@ -7,6 +7,11 @@ class User < ApplicationRecord
   has_many :articles
   has_many :comments, dependent: :destroy
 
+  has_many :collects, dependent: :destroy
+  has_many :collected_articles, through: :collects, source: :article
+
+
+
   def admin?
     self.role == "admin"
   end

@@ -58,6 +58,20 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end  
 
+
+  def collect
+    @article = Article.find(params[:id])
+    @article.collects.create!(user: current_user)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def uncollect
+    @article = Article.find(params[:id])
+    collects = Collect.where(article: @article, user: current_user)
+    collects.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def article_params

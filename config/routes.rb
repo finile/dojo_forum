@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   
   resources :articles do
     resources :comments, only: [:create, :edit, :update, :destroy]
+    member do 
+      post :collect
+      post :uncollect
+    end 
   end
   
   namespace :admin do 
@@ -28,6 +32,10 @@ Rails.application.routes.draw do
 
     member do
       get :posted_comments
+    end
+
+    member do
+      get :collected_articles
     end
 
   end

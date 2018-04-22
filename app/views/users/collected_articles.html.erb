@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render partial: "shared/user_nav" %>
+      <table class="table table-striped">
+        <tbody>
+          <% @collected_articles.each do |article|%>
+            <tr>
+              <td><%= article.title %> <br></td>  
+              <td>
+                <% if article.is_collected?(current_user)%>
+                  <%= link_to 'Uncollect', uncollect_article_path(article), method: :post, class: "btn btn-md btn-primary pull-right" %>
+                <% else %> 
+                  <%= link_to 'Collect', collect_article_path(article), method: :post, class: "btn btn-md btn-primary pull-right" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

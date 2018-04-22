@@ -22,7 +22,7 @@
   <ul class="nav nav-tabs">
     <li class="<%= active_class(posted_articles_user_path) %>"><%= link_to 'My Post', posted_articles_user_path(@user), method: :get %> </li>
     <li class="<%= active_class(posted_comments_user_path) %>"><%= link_to 'My Comment', posted_comments_user_path(@user), method: :get %></li>
-    <li><a href="#">My Collect</a></li>
+    <li class="<%= active_class(collected_articles_user_path) %>"><%= link_to 'My Collect', collected_articles_user_path(@user), method: :get %></li>
     <li class="<%= active_class(posted_drafts_user_path) %>"><%= link_to 'My Draft', posted_drafts_user_path(@user), method: :get %></li>
     <li><a href="#">My Friend</a></li>
   </ul>

@@ -34,6 +34,11 @@ class UsersController < ApplicationController
     @posted_comments = @user.comments
   end
 
+  def collected_articles
+    @user = User.find(params[:id])
+    @collected_articles = @user.collected_articles
+  end
+
   private
 
   def set_user
