@@ -15,6 +15,7 @@ category_list = [
   { name: "Cat" },
   { name: "Dog" },
   { name: "Hamster" },
+  { name: "Others" }
 ]
 
 category_list.each do |category|

@@ -52,6 +52,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def feeds
+    @users = User.all
+    @articles = Article.all
+    @comment = Comment.all
+    @user = User.all.order(comments_count: :desc).limit(10)
+    @article = Article.all.order(collects_count: :desc).limit(10)
+  end
+
+
   def destroy
     @article = Article.find(params[:id])
     @article.destroy

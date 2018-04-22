@@ -1,0 +1,27 @@
+<h1>Feeds</h1>
+
+User: <%= @users.count%>
+Post: <%= @articles.count%>
+Comment: <%= @comment.count%> <br>
+
+
+Chatterbox <br>
+<tbody>
+  <% @user.each do |user|%>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.comments.count%><br></td>
+  </tr>
+  <% end %>
+</tbody>
+
+Most Popular Post <br>
+<tbody>
+  <% @article.each do |article|%>
+  <tr>
+    <td><%= article.title %></td>
+    <td><%= article.published_at.strftime('%Y-%m-%d') %></td>
+    <td><%= article.collects.count %><br></td>
+  </tr>
+  <% end %>
+</tbody>

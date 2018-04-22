@@ -6,7 +6,7 @@
       <table class="table table-striped">
         <tbody>
           <% @posted_articles.each do |article|%>
-            <% if article.published? %>
+            <% unless article.published? %>
             <tr>
               <td><%= article.title %> <br></td>
               <td>
