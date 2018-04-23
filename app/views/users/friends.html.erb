@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render partial: "shared/user_nav" %>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="page-header">
+        <h3>Waiting for response</h3>
+      </div>
+      <% @sent.each do |request| %>
+        <div class="col-md-2 col-sm-3 col-xs-5 text-center user-item">
+          <img src="http://via.placeholder.com/100x100">
+          <h5><%= request.friend.name %></h5>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="page-header">
+      </div>
+      <% @received.each do |request| %>
+        <div class="col-md-2 col-sm-3 col-xs-5 text-center user-item">
+          <img src="http://via.placeholder.com/100x100">
+          <h5><%= request.user.name %></h5>
+          <div class="btn-group">
+            <%= link_to 'Accept', friend_requests2_path(request.id), method: :patch, class: 'btn btn-info btn-raised btn-sm' %> <br>
+            <%= link_to 'Ignore', friend_requests2_path(request.id), method: :delete, class: 'btn btn-danger btn-simple btn-sm' %>
+          </div>
+        </div>
+      <% end %>
+    </div>    
+
+    <div class="col-md-10 col-md-offset-1">
+      <div class="page-header">
+        <h3>Friend</h3>
+      </div>
+      <% @friends.each do |friend| %>
+        <div class="col-md-2 col-sm-3 col-xs-5 text-center user-item">
+          <img src="http://via.placeholder.com/100x100">
+          <h5><%= friend.name %></h5>
+          <% if current_user.friends.include?(friend) %>
+          <%= link_to "Remove friend", friendship2_path(friend), method: :delete, class: "btn btn-danger btn-raised" %>
+          <% else %>
+          <%= render 'users/send_friend_request', user: friend %>
+        <% end %>
+        </div>
+      <% end %>
+    </div>      
+  </div>
+</div>

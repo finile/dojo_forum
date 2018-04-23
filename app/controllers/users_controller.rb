@@ -39,6 +39,14 @@ class UsersController < ApplicationController
     @collected_articles = @user.collected_articles
   end
 
+  def friends
+    @user = User.find( params[:id])
+    @received = FriendRequests2.where(friend: current_user)
+    @sent = current_user.friend_requests2s
+    @friends = @user.friends
+  end
+
+
   private
 
   def set_user

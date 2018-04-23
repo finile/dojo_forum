@@ -12,6 +12,17 @@
     <div class="col-md-2">
       <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
       <%= @article.user.name %>
+       <% if current_user.friends.include?(@article.user) %>
+          <%= link_to "Remove friend", friendship2_path(@article.user), method: :delete, class: "btn btn-danger btn-raised" %>
+        <% else %>
+          <% if current_user.pending_friends.include?(@article.user) || @article.user.pending_friends.include?(current_user) %>
+            <button class="btn btn-default disabled">Friend request sent</button>
+          <% elsif @article.user.friends.include?(current_user) %>
+            <h4 class="text-info">You are friends!</h4>
+          <% else %>
+            <%= link_to 'Send friend request', friend_requests2s_path(friend_id: @article.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+          <% end %>
+        <% end %>
     </div> 
     <div class="col-md-10">
       <div class="tweets col-xs-12">
@@ -33,6 +44,17 @@
       <div class="col-md-2">
         <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
         <%= comment.user.name %>
+        <% if current_user.friends.include?(comment.user) %>
+          <%= link_to "Remove friend", friendship2_path(comment.user), method: :delete, class: "btn btn-danger btn-raised" %>
+        <% else %>
+          <% if current_user.pending_friends.include?(comment.user) || comment.user.pending_friends.include?(current_user) %>
+            <button class="btn btn-default disabled">Friend request sent</button>
+          <% elsif comment.user.friends.include?(current_user) %>
+            <h4 class="text-info">You are friends!</h4>
+          <% else %>
+            <%= link_to 'Send friend request', friend_requests2s_path(friend_id: comment.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+          <% end %>
+        <% end %>
       </div> 
       <div class="col-md-10">
         <div class="tweets col-xs-12">
@@ -75,19 +97,4 @@
   <% end %>
 </p>
 
-<%= link_to 'Back to Index', articles_path %>
 
-<!-- <script>
-$("#comment").on("click", ".delete", function(event) {
-  var id = event.target.parentNode.parentNode.id;
-  console.log(id);
-  $.ajax({
-    url: "comments/" + id,
-    method: "DELETE",
-    dataType: "json",
-    success: function(data) {
-      $("#" + data["id"]).remove();
-    }
-  });
-});
-</script> -->

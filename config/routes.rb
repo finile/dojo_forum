@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :friend_requests2s
+  resources :friendship2s
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -42,6 +45,12 @@ Rails.application.routes.draw do
       get :collected_articles
     end
 
+    member do
+      get :friends
+    end
+
+    get '/friend_requests2s', to: 'friend_requests2s#index'
+    get '/friends', to: 'friendship2s#index'
   end
 
 

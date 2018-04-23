@@ -1,0 +1,2 @@
+module Friendship2sHelper
+end
