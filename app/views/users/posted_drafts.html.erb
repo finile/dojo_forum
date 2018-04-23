@@ -10,7 +10,7 @@
             <tr>
               <td><%= article.title %> <br></td>
               <td>
-                <% unless article.published? %>
+                <% if article.published? %>
                   <span>Article</span>
                 <% else %>
                   <span >Draft</span>

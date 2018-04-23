@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @article = Article.all
+    @article = Article.page(params[:page]).per(10)
     @categories = Category.all
   end
 

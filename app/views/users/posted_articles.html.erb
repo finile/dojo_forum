@@ -19,7 +19,8 @@
             <td>
               <% if current_user == article.user %>
                 <i>
-                  <%= link_to '', edit_article_path(article), class: "fas fa-pen-square" %></i>
+                  <%= link_to '', edit_article_path(article), class: "fas fa-pen-square" %>    
+                </i>
                 <i> 
                   <%= link_to '', article_path(article), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt" %>
                 </i>

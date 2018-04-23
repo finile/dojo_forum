@@ -3,30 +3,23 @@
     <tr>
       <th>Repliles count</th>
       <th>Title</th>
-      <th>Situation</th>
       <th>Last Replied at</th>
       <th>Viewed count</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @articles.each do |article|%>
-      <% if article.published? %>
-        <tr>
-          <td>xxx</td>
-          <td><%= article.title %> <br></td>
-          <td>
-            <% if article.published? %>
-              <span>Article</span>
-            <% else %>
-              <span >Draft</span>
-            <% end %>
-          </td>
-          <td><%= article.categories.map(&:name).sort.join(", ") %></td>
-          <td>xxxx</td>
-        </tr>
-      <% end %>
+    <% @article.each do |article|%>
+    <% if article.published? %>
+      <tr>
+        <td><%= article.comments.count %></td>
+        <td><%= article.title %></td>
+        <td><%= article.comments.last.created_at.strftime('%Y-%m-%d') %></td>
+        <td><%= link_to '', article_path(article), class: "fas fa-eye"%></td>
+        <!-- <td><%= article.categories.map(&:name).sort.join(", ") %></td> -->
+      </tr>
+    <% end %>
     <% end %>
   </tbody>
-
 </table>
+

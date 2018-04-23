@@ -1,100 +1,108 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>
-      <%= @article.title %>
-      <a href="#comment" class="btn btn-md btn-primary pull-right">Comment</a>
-      <% if @article.is_collected?(current_user)%>
-        <%= link_to 'Uncollect', uncollect_article_path(@article), method: :post, class: "btn btn-md btn-primary pull-right" %>
-        <% else %> 
-          <%= link_to 'Collect', collect_article_path(@article), method: :post, class: "btn btn-md btn-primary pull-right" %>
-        <% end %>
-    </h1>
-    <div class="col-md-2">
-      <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-      <%= @article.user.name %>
-       <% if current_user.friends.include?(@article.user) %>
-          <%= link_to "Remove friend", friendship2_path(@article.user), method: :delete, class: "btn btn-danger btn-raised" %>
-        <% else %>
-          <% if current_user.pending_friends.include?(@article.user) || @article.user.pending_friends.include?(current_user) %>
-            <button class="btn btn-default disabled">Friend request sent</button>
-          <% elsif @article.user.friends.include?(current_user) %>
-            <h4 class="text-info">You are friends!</h4>
-          <% else %>
-            <%= link_to 'Send friend request', friend_requests2s_path(friend_id: @article.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+    <div class="article_nav">
+      <h3>
+        <%= @article.title %>
+        <a href="#comment" class="btn btn-md btn-primary pull-right">Comment</a>
+        <% if @article.is_collected?(current_user)%>
+          <%= link_to 'Uncollect', uncollect_article_path(@article), method: :post, class: "btn btn-md btn-primary pull-right" %>
+          <% else %> 
+            <%= link_to 'Collect', collect_article_path(@article), method: :post, class: "btn btn-md btn-primary pull-right" %>
           <% end %>
-        <% end %>
-    </div> 
-    <div class="col-md-10">
-      <div class="tweets col-xs-12">
-        <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
-        <%= @article.content %>
-        <%= @article.categories.map(&:name).sort.join(", ") %>
-
+      </h3>
+    </div>
+  
+    <div class="col-md-12 article">
+      <div class="col-md-2 user_index">
+        <div class="user_profile">
+          <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+          <%= @article.user.name %>
+        </div>
+        <div class="user_friend">
+          <% if current_user.friends.include?(@article.user) %>
+            <%= link_to "Remove friend", friendship2_path(@article.user), method: :delete, class: "btn btn-danger btn-raised" %>
+          <% else %>
+            <% if current_user.pending_friends.include?(@article.user) || @article.user.pending_friends.include?(current_user) %>
+              <button class="btn btn-default disabled">Friend request sent</button>
+            <% elsif @article.user.friends.include?(current_user) %>
+              <h4 class="text-info">You are friends!</h4>
+            <% else %>
+              <%= link_to 'Add Friend', friend_requests2s_path(friend_id: @article.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div> 
+      <div class="col-md-10 user_comment">
+        <div class="tweets col-xs-12">
+          <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
+          <div class="article_content">
+            <%= @article.content %>
+          </div>
+        </div>
+        <div class="article_icon">
+          <% if current_user == @article.user %>
+            <%= link_to '', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt pull-right" %>
+            <%= link_to '', edit_article_path(@article), class: "fas fa-pen-square pull-right " %>
+          <% end %>
+        </div>
       </div>
-      <% if current_user == @article.user %>
-        <%= link_to 'Delete', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %>
-        <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-md btn-primary pull-right " %>
+    </div>
+    <div class="clearfix"></div>
+    <div id="comment">
+      <% @article.comments.each do |comment| %>
+      <div class="col-md-12 comment" id="<%= comment.id %>">
+        <div class="col-md-2 user_index">
+          <div class="user_profile">
+            <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+            <%= comment.user.name %>
+          </div>
+          <div class="user_friend">
+            <% if current_user.friends.include?(comment.user) %>
+            <%= link_to "Remove friend", friendship2_path(comment.user), method: :delete, class: "btn btn-danger btn-raised" %>
+            <% else %>
+              <% if current_user.pending_friends.include?(comment.user) || comment.user.pending_friends.include?(current_user) %>
+                <button class="btn btn-default disabled">Friend request sent</button>
+              <% elsif comment.user.friends.include?(current_user) %>
+                <h4 class="text-info">You are friends!</h4>
+              <% else %>
+                <%= link_to 'Add Friend', friend_requests2s_path(friend_id: comment.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div> 
+        <div class="col-md-10 user_comment ">
+          <div class="tweets col-xs-12">
+            <div class="article_content">
+              <%= comment.content %>
+            </div>
+          </div>
+          <% if current_user == @article.user %>
+       <!-- <%= link_to 'Delete', article_comment_path(@article,comment), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %> -->
+    <!--          <span class="delete btn btn-md btn-primary pull-right">Delete</span>
+            <%= link_to 'Edit', edit_article_comment_path(@article), class: "btn btn-md btn-primary pull-right " %> -->
+          <% end %>
+        </div>
+      </div>
       <% end %>
     </div>
-  </div>
-  
-  <div id="comment">
-    <% @article.comments.each do |comment| %>
-    <div class="col-md-12" id="<%= comment.id %>">
-      <div class="col-md-2">
-        <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-        <%= comment.user.name %>
-        <% if current_user.friends.include?(comment.user) %>
-          <%= link_to "Remove friend", friendship2_path(comment.user), method: :delete, class: "btn btn-danger btn-raised" %>
-        <% else %>
-          <% if current_user.pending_friends.include?(comment.user) || comment.user.pending_friends.include?(current_user) %>
-            <button class="btn btn-default disabled">Friend request sent</button>
-          <% elsif comment.user.friends.include?(current_user) %>
-            <h4 class="text-info">You are friends!</h4>
-          <% else %>
-            <%= link_to 'Send friend request', friend_requests2s_path(friend_id: comment.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
-          <% end %>
-        <% end %>
-      </div> 
-      <div class="col-md-10">
-        <div class="tweets col-xs-12">
-          <%= comment.content %>
-        </div>
-        <% if current_user == @article.user %>
-     <!-- <%= link_to 'Delete', article_comment_path(@article,comment), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %> -->
-  <!--          <span class="delete btn btn-md btn-primary pull-right">Delete</span>
-          <%= link_to 'Edit', edit_article_comment_path(@article), class: "btn btn-md btn-primary pull-right " %> -->
+    
+    <div class="container col-md-12 add_comment">
+      <div class="row">
+        <%= form_for [@article, @comment] do |f| %>
+          <div class="form-group" >
+            <div class="comment_input">
+              <%= f.text_area :content, placeholder: "add comment", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+            <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+          </div>
         <% end %>
       </div>
     </div>
-    <% end %>
   </div>
-
-
-
-
-   <div class="container col-md-12">
-    <div class="row">
-     <%= form_for [@article, @comment] do |f| %>
-      <div class="form-group" >
-        <%= f.text_area :content, placeholder: "add comment", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-      </div>
-    <% end %>
-    </div>
-  </div>
-
 </div>
 
-<p>
-  <% if @article.published? %>
-    <span>Article</span>
-  <% else %>
-    <span >Draft</span>
-  <% end %>
-</p>
 
 

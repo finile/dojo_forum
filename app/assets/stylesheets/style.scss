@@ -11,8 +11,19 @@ h4 {
   font-size: 20px;
 }
 
-.form-group {
-  font-size: 20px;
+.form-group h4 {
+  font-size: 18px;
+  padding-left: 15px;
+}
+
+.form-group .btn {
+  margin-left: 15px;
+}
+
+.btn {
+  padding: 4px 20px;
+  margin-right: 8px;
+  margin-left: 5px;
 }
 
 a:hover {
@@ -21,6 +32,10 @@ a:hover {
 
 nav.navbar {
   background-color: #88c4ce;
+}
+
+.navbar {
+  margin-bottom: 0px;
 }
 
 .navbar-brand {
@@ -55,6 +70,7 @@ nav.navbar {
 .nav-tabs {
   margin-bottom: 20px;
 }
+
 
 
 .inset {
@@ -170,3 +186,102 @@ i {
   font-size: 18px;
   padding:5px;
 }
+
+.field {
+  padding-top: 20px;
+  font-size: 16px;
+}
+
+.field .label {
+  margin-right: 15px;
+  color: black;
+  font-size: 16px;
+  padding-left: 0px;
+}
+
+.article_nav {
+  border: 1px solid #cccccc;
+  padding:0px 20px 10px 10px;
+  background: #f2f2f2;
+}
+
+.article {
+  border: 1px solid #cccccc;
+  padding:0px 20px 0px 10px;
+}
+
+.user_index {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.user_comment {
+ padding-bottom: 12px;
+ border-left: 1px solid #cccccc;
+}
+
+.user_comment img {
+  margin-top: 30px;
+}
+
+.user_profile {
+  text-align: center;
+}
+
+.user_profile img {
+  margin-left: 10px;
+}
+
+.user_friend  {
+  margin-top: 10px;
+}
+
+.article_content {
+  padding: 20px 30px 20px 0px;
+}
+
+.article_icon {
+  font-size: 30px;
+  padding-right: 10px;
+}
+
+.article_icon a {
+  padding-left: 10px; 
+}
+
+
+.comment {
+  border: 1px solid  #cccccc;
+  padding:0px 20px 0px 10px;
+  background: #f2f2f2;
+}
+
+.comment .user_comment {
+ padding-bottom: 12px;
+ border-left: 0px solid #cccccc;
+}
+
+
+.comment .user_index {
+  border-right: 1px solid #cccccc;
+}
+
+
+.add_comment {
+  border: 1px solid #cccccc;
+  padding: 20px 20px 20px 20px;
+}
+
+.form-group .comment_input {
+  padding: 0px 20px 20px 20px;
+}
+
+.form-group .comment_input .form-control {
+  height: 200px;
+  border-radius: 15px;
+}
+
+
+
+
+
