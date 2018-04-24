@@ -8,12 +8,29 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article)
   end
 
+  def edit
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    
+  end
+  
+  def update
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to article_path(@article)
+      flash[:notice] = "comment was successfully updated"
+    else
+      redirect_to article_path(@article)
+    end
+  end
+
+
   def destroy
     @article = Article.find(params[:article_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to article_path(@article)
-    render :json => { :id => @comment.id }
   end
 
   private 

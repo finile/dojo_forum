@@ -1,0 +1,11 @@
+<% if current_user.friends.include?(user) %>
+  <%= link_to "Remove Friend", friendship2_path(user), method: :delete, class: "btn btn-danger btn-raised" %>
+  <% else %>
+    <% if current_user.pending_friends.include?(user) || user.pending_friends.include?(current_user) %>
+    <button class="btn btn-default disabled">Friend Request Sent</button>
+    <% elsif user.friends.include?(current_user) %>
+      <h4 class="text-info">You are friends!</h4>
+    <% else %>
+      <%= link_to 'Add Friend', friend_requests2s_path(friend_id: user.id), method: :post, class: 'btn btn-primary btn-raised' %>
+  <% end %>
+<% end %>

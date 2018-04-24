@@ -1,20 +1,24 @@
 <div class="container">
   <div class="row">
+    <%= render partial: "shared/user_nav" %>
     <div class="col-md-10 col-md-offset-1">
-      <%= render partial: "shared/user_nav" %>
       <div id="comment">
         <% @posted_comments.each do |comment| %>
-        <div class="col-md-12" id="<%= comment.id %>">
+        <div class="col-md-12 profile_comment " id="<%= comment.id %>" >
           <div class="col-md-12">
-            Title: <%= comment.article.title %>
+            <p>
+              Post Title: <%= comment.article.title %>
+            </p>
           </div> 
-          <div class="col-md-10">
-            <div class="tweets">
+          <div class="col-md-6">
+            <p class="tweets">
               <%= comment.content %>
-            </div>
+            </p>
           </div>
-          <div class="col-md-2">
-            <div class="tweets">
+          <div class="col-md-4">
+            <div class="profile_comment_icon">
+              <%= link_to '', edit_article_comment_path(id: comment.id, article_id: comment.article.id), class: "fas fa-pen-square" %>
+              <%= link_to '', article_comment_path(id: comment.id, article_id: comment.article.id), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt" %>
             </div>
           </div>
         </div>

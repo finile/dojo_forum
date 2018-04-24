@@ -32,8 +32,14 @@ class ArticlesController < ApplicationController
     else
       @article = Article.find(params[:id])
     end
-    @comment = Comment.new
+    
+    if params[:comment_id]
+      @comment = Comment.find(params[:comment_id])
+    else
+      @comment = Comment.new
+    end
   end
+
 
   def edit
     @article = Article.find(params[:id])

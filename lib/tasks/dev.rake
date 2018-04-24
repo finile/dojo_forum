@@ -1,14 +1,14 @@
 namespace :dev do
-  task fake: [:fake_user, :fake_article, :fake_article_category, :fake_collect, :fake_comment]
+  task fake: [:fake_user, :fake_article, :fake_article_category, :fake_collect, :fake_comment, :fake_friend_requests2, :fake_friendship2 ]
   
   task fake_user: :environment do
     User.destroy_all
 
-    12.times do |i|
+    30.times do |i|
       name = FFaker::Name::first_name
       user = User.new(
         name: name,
-        email: "#{name}@example.co",
+        email: "#{name}@example.com",
         password: "12345678",
       )
       user.save!
@@ -16,7 +16,7 @@ namespace :dev do
     end
 
     User.create(
-      email: "root@example.com",
+      email: "admin@example.com",
       password: 12345678,
       name: "Admin",
       role: "admin"
@@ -31,7 +31,7 @@ namespace :dev do
     #from creating rand time of ticket
     #create 25 fack tickets information
     User.all.each do |user|
-      rand(20).times do
+      rand(25).times do
         user.articles.create(
           title:FFaker::Book::title,
           content:FFaker::Lorem::sentence(30),
@@ -44,6 +44,7 @@ namespace :dev do
   end
 
   task fake_article_category: :environment do
+    ArticleCategory.destroy_all
     rand(50).times do |i|
       article_category = ArticleCategory.create(
         category_id: Category.all.sample.id,
@@ -70,7 +71,7 @@ namespace :dev do
     Comment.destroy_all
 
     Article.all.each do |article|
-      2.times do |i|
+      rand(10).times do |i|
         article.comments.create!(
           content:FFaker::Lorem.sentence,
           user:User.all.sample
@@ -79,6 +80,28 @@ namespace :dev do
     end
     puts "have created fake comments"
     puts "now you have #{Comment.count} comment data"
+  end
+
+  task fake_friend_requests2: :environment do
+    FriendRequests2.destroy_all
+    200.times do |i|
+      fake_friend_requests2 = FriendRequests2.create(
+        user_id: User.all.sample.id,
+        friend_id: User.all.sample.id
+        )
+    end
+    puts "now you have #{FriendRequests2.count} friend_requests2 data"
+  end
+
+  task fake_friendship2: :environment do 
+    Friendship2.destroy_all
+    200.times do |i|
+      friendship2 = Friendship2.create(
+        user_id: User.all.sample.id,
+        friend_id: User.all.sample.id
+        )
+    end
+    puts "now you have #{Friendship2.count} friendship data"
   end
 
 end

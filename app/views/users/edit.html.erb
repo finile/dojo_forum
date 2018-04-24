@@ -13,8 +13,8 @@
           <%= f.text_area :intro, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.submit "Update", class: "btn btn-primary" %>
-          <%= link_to "Cancel", user_path(@user), class: "btn btn-default" %>
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+          <%= link_to "Cancel", posted_articles_user_path(@user),class: "btn btn-default" %>
         </div>
       <% end %>
     </div>

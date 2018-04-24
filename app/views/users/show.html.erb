@@ -11,10 +11,15 @@
         </div>
         </div>
         <div class="col-md-9 col-sm-8">
-          <div><%= simple_format @user.intro %></div>
-          <div class="pull-right">
-            <% if @user.email == current_user.email %>
+          <div class="user_intro">
+              <%= simple_format @user.intro %>
+          </div>
+          <div class="user_edit">
+            <% if @user == current_user %>
               <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-md btn-primary" %>
+            <% end %>
+            <%unless @user == current_user %>
+              <%= render partial: "shared/user_friend", locals: {user: @user} %>
             <% end %>
           </div>
         </div>

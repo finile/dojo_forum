@@ -16,23 +16,13 @@
       <div class="col-md-2 user_index">
         <div class="user_profile">
           <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-          <%= @article.user.name %>
+          <p><%= link_to "#{@article.user.name}",posted_articles_user_path(@article.user) %></p> 
         </div>
         <div class="user_friend">
-          <% if current_user.friends.include?(@article.user) %>
-            <%= link_to "Remove friend", friendship2_path(@article.user), method: :delete, class: "btn btn-danger btn-raised" %>
-          <% else %>
-            <% if current_user.pending_friends.include?(@article.user) || @article.user.pending_friends.include?(current_user) %>
-              <button class="btn btn-default disabled">Friend request sent</button>
-            <% elsif @article.user.friends.include?(current_user) %>
-              <h4 class="text-info">You are friends!</h4>
-            <% else %>
-              <%= link_to 'Add Friend', friend_requests2s_path(friend_id: @article.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
-            <% end %>
-          <% end %>
+          <%= render partial: "shared/user_friend", locals: {user: @article.user} %>
         </div>
       </div> 
-      <div class="col-md-10 user_comment">
+      <div class="col-md-10 user_article">
         <div class="tweets col-xs-12">
           <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
           <div class="article_content">
@@ -40,7 +30,7 @@
           </div>
         </div>
         <div class="article_icon">
-          <% if current_user == @article.user %>
+          <% if current_user == @article.user or current_user.role == 'admin' %>
             <%= link_to '', article_path(@article), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt pull-right" %>
             <%= link_to '', edit_article_path(@article), class: "fas fa-pen-square pull-right " %>
           <% end %>
@@ -54,33 +44,24 @@
         <div class="col-md-2 user_index">
           <div class="user_profile">
             <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
-            <%= comment.user.name %>
+            <p><%= link_to "#{comment.user.name}",posted_articles_user_path(comment.user) %></p> 
           </div>
           <div class="user_friend">
-            <% if current_user.friends.include?(comment.user) %>
-            <%= link_to "Remove friend", friendship2_path(comment.user), method: :delete, class: "btn btn-danger btn-raised" %>
-            <% else %>
-              <% if current_user.pending_friends.include?(comment.user) || comment.user.pending_friends.include?(current_user) %>
-                <button class="btn btn-default disabled">Friend request sent</button>
-              <% elsif comment.user.friends.include?(current_user) %>
-                <h4 class="text-info">You are friends!</h4>
-              <% else %>
-                <%= link_to 'Add Friend', friend_requests2s_path(friend_id: comment.user.id), method: :post, class: 'btn btn-primary btn-raised' %>
-              <% end %>
-            <% end %>
+            <%= render partial: "shared/user_friend", locals: {user: comment.user} %>
           </div>
         </div> 
         <div class="col-md-10 user_comment ">
-          <div class="tweets col-xs-12">
+          <div class="tweets col-xs-9">
             <div class="article_content">
               <%= comment.content %>
             </div>
           </div>
-          <% if current_user == @article.user %>
-       <!-- <%= link_to 'Delete', article_comment_path(@article,comment), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-md btn-primary pull-right" %> -->
-    <!--          <span class="delete btn btn-md btn-primary pull-right">Delete</span>
-            <%= link_to 'Edit', edit_article_comment_path(@article), class: "btn btn-md btn-primary pull-right " %> -->
-          <% end %>
+          <div class="comment_icon">
+            <% if current_user == comment.user or current_user.role = 'admin'%>
+              <%= link_to '', edit_article_comment_path(id: comment.id, article_id: @article.id), class: "fas fa-pen-square" %>
+              <%= link_to '', article_comment_path(id: comment.id, article_id: @article.id), method: :delete, data: {confirm:"Are you sure?"}, class: "far fa-trash-alt" %>
+            <% end %>
+          </div>
         </div>
       </div>
       <% end %>

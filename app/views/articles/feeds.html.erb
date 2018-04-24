@@ -1,27 +1,49 @@
-<h1>Feeds</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 feed_news">
+      <div class="col-md-4">
+        <h3>User</h3>
+        <p><%= @users.count%></p>
+      </div>
+      <div class="col-md-4">
+        <h3>Post</h3>
+        <p><%= @articles.count%></p>
+      </div>
+      <div class="col-md-4">
+        <h3>Comment</h3>
+        <p><%= @comment.count%> </p>
+      </div>
+    </div>
+    <div class="col-md-10 col-md-offset-1 feed_news_list">
+      <div class="col-md-6 news_list">
+        <h3>Chatterbox</h3>
+        <table class="table table-striped">
+          <tbody>
+            <% @user.each_with_index do |user, i|%>
+            <tr>
+              <td><%= i + 1%>.</td>
+              <td><%= user.name %></td>
+              <td><%= user.comments.count%></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 news_list">
+        <h3>Most Popular Post</h3>
+        <table class="table table-striped">
+          <tbody>
+            <% @article.each_with_index do |article, i|%>
+            <tr>
+              <td><%= i + 1 %>.</td>
+              <td><%= article.title %></td>
+              <td><%= article.published_at.strftime('%Y-%m-%d') %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-User: <%= @users.count%>
-Post: <%= @articles.count%>
-Comment: <%= @comment.count%> <br>
-
-
-Chatterbox <br>
-<tbody>
-  <% @user.each do |user|%>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.comments.count%><br></td>
-  </tr>
-  <% end %>
-</tbody>
-
-Most Popular Post <br>
-<tbody>
-  <% @article.each do |article|%>
-  <tr>
-    <td><%= article.title %></td>
-    <td><%= article.published_at.strftime('%Y-%m-%d') %></td>
-    <td><%= article.collects.count %><br></td>
-  </tr>
-  <% end %>
-</tbody>

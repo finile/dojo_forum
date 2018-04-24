@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     collection do 
       get :feeds
     end
-
   end
   
+
   namespace :admin do 
     root "categories#index"
     resources :categories

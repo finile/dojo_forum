@@ -7,7 +7,6 @@ h2 {
 }
 
 h4 {
-
   font-size: 20px;
 }
 
@@ -215,25 +214,28 @@ i {
   padding-bottom: 20px;
 }
 
-.user_comment {
+.user_article {
  padding-bottom: 12px;
  border-left: 1px solid #cccccc;
 }
 
-.user_comment img {
+.user_article img {
   margin-top: 30px;
 }
+
+
 
 .user_profile {
   text-align: center;
 }
 
 .user_profile img {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .user_friend  {
   margin-top: 10px;
+  text-align: center;
 }
 
 .article_content {
@@ -281,7 +283,152 @@ i {
   border-radius: 15px;
 }
 
+.user_intro p {
+  padding-top: 15px;
+}
+
+.user_edit a {
+  position: absolute;
+  top: 120px;
+  right: 0px;
+}
+
+.user_edit .btn {
+  position: absolute;
+  top: 120px;
+  right: 0px;
+}
+
+.friend-page-header h3 {
+  text-align: center;
+}
+
+.requested_friend_list {
+  background: #f2f2f2;
+}
+
+.requested_friend {
+  border: 0px;
+}
+
+.received_friend {
+  border: 0px;
+}
+
+.received_friend a {
+ border-radius: 5px !important;
+ margin: 0px 0px 10px 0px;
+}
+
+.received_friend .btn-group {
+  text-align: center;
+}
+
+.friend {
+  border: 0px;
+}
+
+.user_nav {
+  padding: 0px !important; 
+}
+
+.user_nav .page-header {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 10px 20px 0px 20px;
+  background: #f2f2f2;
+}
+
+.user_nav .page-header h2 {
+  text-align: center;
+  padding-left: 60px;
+  font-size: 30px;
+}
+
+.user_nav .user_tab li {
+  font-size: 18px;
+  padding: 0px 30px 0px 10px;
+}
+
+.received_friend_list {
+  background: #e2e2e2;
+}
+
+.friend_list {
+  background: #f2f2f2;
+}
 
 
+.feed_news {
+  text-align: center;
+  padding: 20px 120px 20px 120px;
+  background: #f2f2f2;
+}
 
+.feed_news p {
+  background: white;
+  width: 125px;
+  margin-left: 45px;
+  font-size: 18px;
+  padding: 0px 5px 0px 5px; 
+  box-shadow: 2px 2px #e2e2e2;
+}
+
+.feed_news_list {
+  padding-left: 0px;
+  padding-right: 5px;
+}
+
+.feed_news_list .news_list{
+  padding-left: 20px;
+}
+
+.feed_news_list h3 {
+  text-align: center;
+  border-bottom: 2px solid #c6c6c6;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.news_list td {
+  font-size: 15px;
+}
+
+.profile_comment {
+  border: 1px solid #e2e2e2;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #f2f2f2;
+}
+
+.profile_comment p {
+  font-size: 18px;
+}
+
+.profile_comment .tweets {
+  padding: 10px 15px 20px 15px;
+  background: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.profile_comment_icon {
+  position: relative;
+  top: 30px;
+  left:70px;
+  font-size: 20px;
+}
+
+
+.comment_icon {
+  position: relative;
+  top: 120px;
+  left:140px;
+}
+
+.user_comment a {
+  padding-left: 10px; 
+  font-size: 30px;
+}
 

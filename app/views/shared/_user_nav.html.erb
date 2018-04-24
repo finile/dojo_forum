@@ -1,29 +1,38 @@
-<div class="page-header">
-  <div class="col-md-3 col-sm-4">
-    <div class="text-center">
-      <img src="http://via.placeholder.com/350x350" class="img-responsive img-rounded">
+<div class="col-md-10 col-md-offset-1 user_nav ">
+  <div class="page-header">
+    <div class="col-md-3 col-sm-4 ">
+      <div class="text-center">
+        <img src="http://via.placeholder.com/350x350" class="img-responsive img-rounded">
+        </div>
+        <div class="pull-left">
+        <h2><%= @user.name %></h2>
       </div>
-      <div class="pull-left">
-      <h2><%= @user.name %></h2>
     </div>
+    <div class="col-md-9 col-sm-8">
+      <div class="user_intro">
+        <%= simple_format @user.intro %>
+      </div>
+      <div class="user_edit">
+        <% if @user == current_user %>
+          <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-md btn-primary" %>
+        <% end %>
+        <%unless @user == current_user %>
+          <%= render partial: "shared/user_friend", locals: {user: @user} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="clearfix"></div>
   </div>
-  <div class="col-md-9 col-sm-8">
-    <div><%= simple_format @user.intro %></div>
-    <div class="pull-right">
-      <% if @user.email == current_user.email %>
-      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-md btn-primary" %>
+  <br>
+  <div class="col-md-12 user_tab">
+    <ul class="nav nav-tabs">
+      <li class="<%= active_class(posted_articles_user_path) %>"><%= link_to 'My Post', posted_articles_user_path(@user), method: :get %> </li>
+      <li class="<%= active_class(posted_comments_user_path) %>"><%= link_to 'My Comment', posted_comments_user_path(@user), method: :get %></li>
+      <% if @user == current_user %>
+        <li class="<%= active_class(collected_articles_user_path) %>"><%= link_to 'My Collect', collected_articles_user_path(@user), method: :get %></li>
+        <li class="<%= active_class(posted_drafts_user_path) %>"><%= link_to 'My Draft', posted_drafts_user_path(@user), method: :get %></li>
       <% end %>
-    </div>
+        <li class="<%= active_class(friends_user_path) %>"><%= link_to 'My Friend', friends_user_path(current_user), method: :get %></li>
+    </ul>
   </div>
-  <div class="clearfix"></div>
-</div>
-<br>
-<div class="col-md-10">
-  <ul class="nav nav-tabs">
-    <li class="<%= active_class(posted_articles_user_path) %>"><%= link_to 'My Post', posted_articles_user_path(@user), method: :get %> </li>
-    <li class="<%= active_class(posted_comments_user_path) %>"><%= link_to 'My Comment', posted_comments_user_path(@user), method: :get %></li>
-    <li class="<%= active_class(collected_articles_user_path) %>"><%= link_to 'My Collect', collected_articles_user_path(@user), method: :get %></li>
-    <li class="<%= active_class(posted_drafts_user_path) %>"><%= link_to 'My Draft', posted_drafts_user_path(@user), method: :get %></li>
-    <li class="<%= active_class(friends_user_path) %>"><%= link_to 'My Friend', friends_user_path(@user), method: :get %></li>
-  </ul>
 </div>
