@@ -17,4 +17,6 @@ class Article < ApplicationRecord
     self.collected_users.include?(user)
   end
 
+  is_impressionable
+  
 end

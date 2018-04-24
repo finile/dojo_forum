@@ -71,7 +71,7 @@ namespace :dev do
     Comment.destroy_all
 
     Article.all.each do |article|
-      rand(10).times do |i|
+      rand(2..10).times do |i|
         article.comments.create!(
           content:FFaker::Lorem.sentence,
           user:User.all.sample

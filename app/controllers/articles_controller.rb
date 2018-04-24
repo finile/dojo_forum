@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+
+  impressionist :actions=>[:show,:index]
+
+
   def index
     @article = Article.page(params[:page]).per(10)
     @categories = Category.all
@@ -31,6 +35,7 @@ class ArticlesController < ApplicationController
       redirect_to new_user_session_path
     else
       @article = Article.find(params[:id])
+      impressionist(@article)
     end
     
     if params[:comment_id]
@@ -38,6 +43,7 @@ class ArticlesController < ApplicationController
     else
       @comment = Comment.new
     end
+    
   end
 
 
