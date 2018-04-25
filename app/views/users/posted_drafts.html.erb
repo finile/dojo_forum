@@ -10,12 +10,12 @@
               <td><%= article.title %> <br></td>
               <td>
                 <% if article.published? %>
-                  <span>Article</span>
+                  <span>Published</span>
                 <% else %>
                   <span >Draft</span>
                 <% end %>
               </td>
-              <td><%= article.updated_at %></td>
+              <td><%= article.updated_at.strftime('%Y-%m-%d') %></td>
               <td>
                 <% if current_user == article.user %>
                   <i>

@@ -1,30 +1,31 @@
-<div class="row">
-  <div class="col-md-11 offset-md-1">
-    <div class="form-horizontal">
-      <%= form_for @article do |f| %>
-       <div class="form-group">
-          <%= f.text_field :title, size: "60x12" , placeholder: "Title?", class: "form-control text-field" %>
-        </div>
-        <div class="form-group">
-          <%= f.text_area :content, size: "60x12" , placeholder: "What's on your mind?", class: "form-control text-area" %>
-        </div>
-        <div>
-          <%= f.file_field "File", class: "pull-left" %> 
-        </div>
-        <div class="field">
-          <%= f.label "Category:", class: "label" %>  
-          <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
-            <%= b.check_box %>  
-            <%= b.label %>
-          <% end %>
-        </div>
-        <div class="form-group">
-          <h4>Status:</h4>
-          <%= f.submit "Save Draft", class: "btn btn-md btn-primary" %>
-          <%= f.submit "Submit", class: "btn btn-md btn-primary" %>        
-        </div>
-      <% end %>
+<div class="col-md-10 col-md-offset-1">
+  <div class="row">
+    <div class="new_article">
+      <div class="form-horizontal">
+        <%= form_for @article do |f| %>
+         <div class="form-group">
+            <%= f.text_field :title, size: "60x12" , placeholder: "Title?", class: "form-control text-field" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_area :content, size: "60x12" , placeholder: "What's on your mind?", class: "form-control text-area" %>
+          </div>
+          <div>
+            <%= f.file_field "File", class: "pull-left" %> 
+          </div>
+          <div class="field">
+            <%= f.label "Category:", class: "label" %>  
+            <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+              <%= b.check_box %>  
+              <%= b.label %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <h4>Status:</h4>
+            <%= f.submit "Save Draft", class: "btn btn-md btn-primary" %>
+            <%= f.submit "Submit", class: "btn btn-md btn-primary" %>    
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-</div>  
-
+  </div>  
+</div>

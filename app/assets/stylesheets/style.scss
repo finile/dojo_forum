@@ -432,3 +432,32 @@ i {
   font-size: 30px;
 }
 
+.sortable th {
+  width: 150px;
+}
+
+.sortable td {
+  width: 150px;
+  padding: 0px !important;
+}
+
+
+.sortable p {
+  width: 40px;
+  text-align: center;
+  background-color: #f2f2f2;
+  margin-left:50px;
+  margin-top: 5px;
+}
+
+.page {
+  text-align: center;
+}
+
+.new_article {
+  margin-top: 50px;
+}
+
+.new_article .form-group {
+  margin-bottom: 20px;
+}

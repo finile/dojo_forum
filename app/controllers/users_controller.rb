@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update]
 
-
   def show
     @user = User.find(params[:id])
     @posted_articles = @user.articles
@@ -31,7 +30,7 @@ class UsersController < ApplicationController
 
   def posted_comments
     @user = User.find(params[:id])
-    @posted_comments = @user.comments
+    @posted_comments = @user.comments.page(params[:page]).per(5)
   end
 
   def collected_articles

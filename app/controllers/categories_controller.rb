@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
-
+  
   def show
     @categories = Category.all
     @category = Category.find(params[:id])
-    @article = @category.articles.page(params[:page]).per(10)
+    @q = @category.articles.ransack(params[:q])
+    @article = @q.result.includes(:comments).page(params[:page]).per(10)
   end
 
 
@@ -53,6 +54,5 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name)
   end
-
 
 end

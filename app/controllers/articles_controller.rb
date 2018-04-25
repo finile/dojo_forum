@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
 
   impressionist :actions=>[:show,:index]
-
+  helper_method :sort_column, :sort_direction
 
   def index
-    @article = Article.page(params[:page]).per(10)
+    @q = Article.ransack(params[:q])
+    @article = @q.result.includes(:comments).page(params[:page]).per(10)
     @categories = Category.all
   end
 
@@ -55,14 +56,17 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.published_at = Time.zone.now if published?
 
-    if @article.update(article_params)
+    if @article.update(article_params) && published?
       redirect_to article_path(@article)
       flash[:notice] = "Article was successfully updated!!"
+    elsif @article.update(article_params) != published?
+      redirect_to posted_drafts_user_path(current_user), notice: "Draft was sucessfully updated"
     else
       render :edit
-      flash[:notice] = "Article was failed to update"
+      flash[:notice] = "Draft/Article was failed to update"
     end
   end
+
 
   def feeds
     @users = User.all
@@ -110,4 +114,5 @@ class ArticlesController < ApplicationController
   def save_as_draft?
     params[:commit] == "Save Draft"
   end
+
 end

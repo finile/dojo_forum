@@ -17,6 +17,6 @@ class Article < ApplicationRecord
     self.collected_users.include?(user)
   end
 
-  is_impressionable
+  is_impressionable :counter_cache => true, :column_name => :views_count
   
 end

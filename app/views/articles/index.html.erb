@@ -4,7 +4,10 @@
   <div class="row">
     <%= render partial: "shared/category_nav" %>
     <%= render partial: "shared/article_list" %>
-    <%= paginate @article %>
+    <div class="clearfix"></div>
+    <div class="page">
+      <%= paginate @article %>
+    </div>
   </div>
 </div>
 

@@ -9,7 +9,10 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+              <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-hear">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> 
@@ -63,8 +66,11 @@
       </div>
     </div>
     <% end %>
-    <div class="container">
     <%= yield %>
+        </div>
+      </div>
     </div>
+
+
   </body>
 </html>
