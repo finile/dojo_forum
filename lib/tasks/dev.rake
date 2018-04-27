@@ -10,6 +10,8 @@ namespace :dev do
         name: name,
         email: "#{name}@example.com",
         password: "12345678",
+        avatar: File.open(Rails.root.join("public/avatar/user#{rand(1..20)}.jpg")),
+        intro: FFaker::Lorem::paragraphs,
       )
       user.save!
     end
@@ -18,7 +20,9 @@ namespace :dev do
       email: "admin@example.com",
       password: 12345678,
       name: "Admin",
-      role: "admin"
+      role: "admin",
+      avatar: File.open(Rails.root.join("public/avatar/user20.jpg")),
+      intro: FFaker::Lorem::paragraphs
       )
     
     puts "admin has been created"
@@ -27,13 +31,13 @@ namespace :dev do
 
   task fake_article: :environment do
     Article.destroy_all
-    # file = File.open("#{Rails.root}/public/images/370x232.png")
     User.all.each do |user|
-      rand(25).times do
+      rand(5).times do
         user.articles.create(
           title:FFaker::Book::title,
           content:FFaker::Lorem::sentence(30),
           authority:["myself", "friend", "all"].sample,
+          image: File.open(Rails.root.join("public/image/#{rand(1..5)}.jpg")),
           published_at: Time.now
         )
       end
@@ -43,7 +47,6 @@ namespace :dev do
   end
 
   task fake_draft: :environment do
-    # file = File.open("#{Rails.root}/public/images/370x232.png")
     User.all.each do |user|
       rand(2).times do
         user.articles.create(

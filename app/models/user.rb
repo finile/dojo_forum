@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :friendship2s, dependent: :destroy
   has_many :friends, through: :friendship2s
 
+  mount_uploader :avatar, AvatarUploader
+
   ROLE_STATUS = [
     ["Admin", :admin],
     ["Normal", :normal]

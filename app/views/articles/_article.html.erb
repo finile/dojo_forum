@@ -9,8 +9,8 @@
           <div class="form-group">
             <%= f.text_area :content, size: "60x12" , placeholder: "What's on your mind?", class: "form-control text-area" %>
           </div>
-          <div>
-            <%= f.file_field "File", class: "pull-left" %> 
+          <div class="form-group">
+            <%= f.file_field :image, class: "pull-left" %>
           </div>
           <div class="field">
             <%= f.label "Category:", class: "label" %>  
@@ -20,6 +20,7 @@
             <% end %>
           </div>
           <div class="field">
+            <p class="label">Who Can See:</p> 
             <%= radio_button :article, :authority, "all", { checked: true , class: "form-check-input" } %>
             <%= label_tag :authority_All, "All", class: "form-check-label" %>
             <%= radio_button :article, :authority, "friend", class: "form-check-input" %>

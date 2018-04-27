@@ -11,7 +11,7 @@
     <div class="col-md-12 article">
       <div class="col-md-2 user_index">
         <div class="user_profile">
-          <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+          <%= image_tag @article.user.avatar, width: "100%", class: "img-responsive img-rounded" if @article.user.avatar? %>
           <p><%= link_to "#{@article.user.name}",posted_articles_user_path(@article.user) %></p> 
         </div>
         <div class="user_friend">
@@ -20,7 +20,7 @@
       </div> 
       <div class="col-md-10 user_article">
         <div class="tweets col-xs-12">
-          <img src="http://via.placeholder.com/400x200" class="img-responsive img-rounded">
+          <%= image_tag @article.image, width: "400px" if @article.image? %>
           <div class="article_content">
             <%= @article.content %>
           </div>
@@ -39,7 +39,7 @@
       <div class="col-md-12 comment" id="<%= comment.id %>">
         <div class="col-md-2 user_index">
           <div class="user_profile">
-            <img src="http://via.placeholder.com/100x100" class="img-responsive img-rounded">
+            <%= image_tag comment.user.avatar, width: "100%", class: "img-responsive img-rounded" if comment.user.avatar? %>
             <p><%= link_to "#{comment.user.name}",posted_articles_user_path(comment.user) %></p> 
           </div>
           <div class="user_friend">

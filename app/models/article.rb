@@ -12,6 +12,7 @@ class Article < ApplicationRecord
   has_many :collects, dependent: :destroy
   has_many :collected_users, through: :collects, source: :user
 
+  mount_uploader :image, ImageUploader
 
   def published?
     published_at?
