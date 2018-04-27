@@ -16,14 +16,14 @@ class User < ApplicationRecord
   has_many :friendship2s, dependent: :destroy
   has_many :friends, through: :friendship2s
 
-  def admin?
-    self.role == "admin"
-  end
-
   ROLE_STATUS = [
     ["Admin", :admin],
     ["Normal", :normal]
   ]
+
+  def admin?
+    self.role == "admin"
+  end
 
   def remove_friend(friend)
     friends.destroy(friend)

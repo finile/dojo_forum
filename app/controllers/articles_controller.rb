@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_article, only:[:show, :edit, :update, :destory, :collect, :uncollect]
+  before_action :set_article, only:[:show, :edit, :update, :destroy, :collect, :uncollect]
   impressionist :actions=>[:show,:index]
 
   def index
@@ -74,7 +74,6 @@ class ArticlesController < ApplicationController
 
   def collect
     @article.collects.create!(user: current_user)
-    # redirect_back(fallback_location: root_path)
     respond_to do |format|
       format.js
     end
@@ -83,7 +82,6 @@ class ArticlesController < ApplicationController
   def uncollect
     collects = Collect.where(article: @article, user: current_user)
     collects.destroy_all
-    # redirect_back(fallback_location: root_path)
     respond_to do |format|
       format.js
     end

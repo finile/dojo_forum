@@ -55,13 +55,13 @@ class Api::V1::ArticlesController < ApiController
 
   private
 
-  def article_params
-    params.permit(:title, :content, :image, :authority, :published_at, category_ids:[])    
-  end
-
-
   def set_article
     @article = Article.find_by(id: params[:id])
   end
 
+  def article_params
+    params.permit(:title, :content, :image, :authority, :published_at, category_ids:[])    
+  end
+
+  
 end
