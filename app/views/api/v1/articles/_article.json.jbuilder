@@ -1,0 +1,1 @@
+json.(article, :id, :title, :content)

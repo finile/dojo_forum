@@ -12,7 +12,6 @@ namespace :dev do
         password: "12345678",
       )
       user.save!
-      puts user.name
     end
 
     User.create(
@@ -23,18 +22,18 @@ namespace :dev do
       )
     
     puts "admin has been created"
+    puts "now you have #{User.count} users data"
   end
 
   task fake_article: :environment do
     Article.destroy_all
     # file = File.open("#{Rails.root}/public/images/370x232.png")
-    #from creating rand time of ticket
-    #create 25 fack tickets information
     User.all.each do |user|
       rand(25).times do
         user.articles.create(
           title:FFaker::Book::title,
           content:FFaker::Lorem::sentence(30),
+          authority:["myself", "friend", "all"].sample,
           published_at: Time.now
         )
       end
@@ -43,9 +42,24 @@ namespace :dev do
     puts "now you have #{Article.count} article data"
   end
 
+  task fake_draft: :environment do
+    # file = File.open("#{Rails.root}/public/images/370x232.png")
+    User.all.each do |user|
+      rand(2).times do
+        user.articles.create(
+          title:FFaker::Book::title,
+          content:FFaker::Lorem::sentence(30),
+        )
+      end
+    end
+    puts "have created fake drafts by users"
+    puts "now you have #{Article.count} draft data"
+  end
+
+
   task fake_article_category: :environment do
     ArticleCategory.destroy_all
-    rand(50).times do |i|
+    rand(70).times do |i|
       article_category = ArticleCategory.create(
         category_id: Category.all.sample.id,
         article_id: Article.all.sample.id

@@ -13,7 +13,7 @@
       <tr>
         <td><p><%= article.comments_count %></p></td>
         <td><%= article.title %></td>
-        <td><%= article.comments.last.created_at.strftime('%Y-%m-%d') %></td>
+        <td><%= article.comments.last.created_at.strftime('%Y-%m-%d') if article.comments.last.present? %></td>
         <td><%= link_to '', article_path(article), class: "fas fa-eye"%> <%= article.views_count %></td>
       </tr>
     <% end %>

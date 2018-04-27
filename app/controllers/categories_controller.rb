@@ -1,9 +1,14 @@
 class CategoriesController < ApplicationController
-  
+  before_action :authenticate_user!, except: :show
+
   def show
     @categories = Category.all
     @category = Category.find(params[:id])
-    @q = @category.articles.ransack(params[:q])
+    if current_user
+      @q = @category.articles.readable_articles(current_user).ransack(params[:q])
+    else  
+      @q = @category.articles.where(authority: "all").ransack(params[:q])
+    end
     @article = @q.result.includes(:comments).page(params[:page]).per(10)
   end
 
@@ -16,7 +21,6 @@ class CategoriesController < ApplicationController
     else
       @category = Category.new
     end
-
   end
 
   def create

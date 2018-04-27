@@ -10,7 +10,6 @@
 # Category
 
 Category.destroy_all
-
 category_list = [
   { name: "Cat" },
   { name: "Dog" },
@@ -22,3 +21,6 @@ category_list.each do |category|
   Category.create( name: category[:name] )
 end
 puts "Category created!"
+
+User.create(email: "admin@example.com", password: "12345678", role: "admin", name: "Admin")
+puts "create admin account"

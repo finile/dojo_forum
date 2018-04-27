@@ -1,0 +1,5 @@
+<% if article.is_collected?(current_user)%>
+  <%= link_to 'Uncollect', uncollect_article_path(article), remote: true, method: :post, class: "btn btn-md btn-primary pull-right", id: "uncollect-#{article.id}" %>
+<% else %> 
+  <%= link_to 'Collect', collect_article_path(article), remote: true, method: :post, class: "btn btn-md btn-primary pull-right",  id: "collect-#{article.id}" %>
+<% end %>

@@ -1,12 +1,13 @@
-<h1>Dojo Forum</h1>
-
 <div class="container">
   <div class="row">
+    <div class="col-md-11">
+    <h1>Dojo Forum</h1>
     <%= render partial: "shared/category_nav" %>
     <%= render partial: "shared/article_list" %>
     <div class="clearfix"></div>
     <div class="page">
       <%= paginate @article %>
+    </div>
     </div>
   </div>
 </div>

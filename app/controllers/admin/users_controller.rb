@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_admin
 
   def index
     @users = User.all
@@ -22,6 +24,13 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:role)
+  end
+
+  def authenticate_admin
+    unless current_user.admin?
+      flash[:alert] = "Not Allow"
+      redirect_to root_path
+    end
   end
 
 end

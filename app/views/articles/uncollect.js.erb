@@ -1,0 +1,2 @@
+$("#uncollect-<%= @article.id %>").parent().prepend("<%= j (link_to 'Collect', collect_article_path(@article), remote: true, method: :post, class: "btn btn-md btn-primary pull-right",  id: "collect-#{@article.id}")%>");
+$("#uncollect-<%= @article.id %>").remove();
