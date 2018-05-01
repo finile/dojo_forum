@@ -430,13 +430,17 @@ i {
   font-size: 30px;
 }
 
+.sortable {
+  margin-left: 30px;
+}
+
 .sortable th {
-  width: 150px;
+  text-align: left;
 }
 
 .sortable td {
-  width: 150px;
   padding: 0px !important;
+  padding-left: 10px !important;
 }
 
 
@@ -444,7 +448,7 @@ i {
   width: 40px;
   text-align: center;
   background-color: #f2f2f2;
-  margin-left:50px;
+  margin-left:10px;
   margin-top: 5px;
 }
 

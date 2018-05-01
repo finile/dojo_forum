@@ -1,10 +1,11 @@
+<div class="container_article">
 <table class="sortable table table-striped">
   <thead>
     <tr>
-      <th><%= sort_link(@q, :comments_count, 'Replilies count', default_order: :desc)%></th>
-      <th>Title</th>
-      <th><%= sort_link(@q, :comments_created_at, 'Last replied at', default_order: :desc)%></th>
-      <th><%= sort_link(@q, :views_count, 'View count', default_order: :desc)%></th>
+      <th width="15%" ><%= sort_link(@q, :comments_count, 'Replilies count', default_order: :desc)%></th>
+      <th width="35%">Title</th>
+      <th width="30%"><%= sort_link(@q, :comments_created_at, 'Last replied at', default_order: :desc)%></th>
+      <th width="9%"><%= sort_link(@q, :views_count, 'View count', default_order: :desc)%></th>
     </tr>
   </thead>
   <tbody>
@@ -20,4 +21,4 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
